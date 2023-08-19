@@ -1,4 +1,5 @@
 .App {
+  padding: 10px;
   text-align: center;
 }
 
@@ -35,4 +36,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.nav-div{
+  display: flex;
+  padding: 1em;
+  justify-content: left;
+  height: 4em;
+  width: 100%;
+  background-color: #ffffff !important;
+
 }
