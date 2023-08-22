@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllPost, getDataByid } from "../../services/getPostService/getPost";
+import { Box, Button, Divider, Paper, Typography } from "@mui/material";
 
 export default function PostPage() {
   const [postData, setPostData] = useState([]);
@@ -30,58 +31,121 @@ export default function PostPage() {
   console.log(useData, "post");
 
   return (
-    <div style={{ backgroundColor: "grey", height: "100%", width: "100%" }}>
+    <>
       {nextPage !== true ? (
-        <div
-          style={{
-            //   display: "flex",
-            height: "1em",
-            backgroundColor: "#ffff",
-            alignItems: "start",
-            justifyContent: "left",
-            flexDirection: "row !important",
-          }}
-        >
-          {postData.length > 0 &&
-            postData.map((ele, id) => (
-              <div
-                style={{
-                  height: "2em",
-                  border: "black",
-                  backgroundColor: "#ffff",
-                  textAlign: "left",
-                  paddding: "5em",
-                }}
-                key={id}
-                onClick={() => {
-                  console.log(ele.userId);
-                  getDetailsById(ele.userId);
-                  setNextPage(true);
-                  setTitel({
-                    title: ele.title,
-                    dis: ele?.description,
-                  });
-                }}
-                //   onClick={() => {
-                //     getDetailsById(ele.userId);   gitlabl nav-r
-                //   }}
-              >
-                <h3>{ele.title}</h3>
-              </div>
-            ))}
+        <div style={{ backgroundColor: "grey", height: "100%", width: "100%" }}>
+          <div
+            style={{
+              //   display: "flex",
+              height: "1em",
+              backgroundColor: "#ffff",
+              alignItems: "start",
+              justifyContent: "left",
+              flexDirection: "row !important",
+            }}
+          >
+            {postData.length > 0 &&
+              postData.map((ele, id) => (
+                <div
+                  style={{
+                    height: "2em",
+                    border: "black",
+                    backgroundColor: "#ffff",
+                    textAlign: "left",
+                    paddding: "5em",
+                  }}
+                  key={id}
+                  onClick={() => {
+                    getDetailsById(ele?.id);
+                    setNextPage(true);
+                    setTitel({
+                      title: ele?.title,
+                      dis: ele?.body,
+                    });
+                  }}
+                >
+                  <h3>{ele.title}</h3>
+                </div>
+              ))}
+          </div>
         </div>
       ) : (
         <>
-          <div>
-            <div>
-              <div>
-                <span>Name:{useData?.company?.name}</span>
-                <span>Name:{useData?.company?.phone}</span>
-              </div>
-            </div>
-          </div>
+          <Paper
+            elevation={5}
+            sx={{
+              mt: "15%",
+              ml: "25%",
+              mr: "25%",
+              width: "50%",
+              p: 2,
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "Center",
+                flexDirection: "column",
+              }}
+            >
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "3em",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box>
+                  <Typography textAlign={"left"}>
+                    Name:{useData?.company?.name}
+                  </Typography>
+                  <Typography textAlign={"left"} variant="subtitle2">
+                    Phone:{useData?.phone}
+                  </Typography>
+                </Box>
+
+                <Typography>Email:{useData?.email}</Typography>
+              </Box>
+              <Divider sx={{ color: "#f7f7f7" }} />
+              <Box
+              // sx={{
+              //   display: "flex",
+              //   justifyContent: "Center",
+              //   flexDirection: "row",
+              //   // mt: "15%",
+              //   ml: "25%",
+              //   mr: "25%",
+              //   width: "40%",
+              // }}
+              >
+                titel:{titel.title}
+              </Box>
+              <Box
+              // sx={{
+              //   display: "flex",
+              //   justifyContent: "Center",
+              //   flexDirection: "row",
+              //   // mt: "15%",
+              //   ml: "25%",
+              //   mr: "25%",
+              //   width: "40%",
+              //   height: "10%",
+              // }}
+              >
+                Body:{titel.dis}
+              </Box>
+            </Box>
+            <Button
+              variant="contained"
+              onClick={() => setNextPage(false)}
+              sx={{ height: "20px" }}
+            >
+              {"<"}
+            </Button>
+          </Paper>
         </>
       )}
-    </div>
+    </>
   );
 }

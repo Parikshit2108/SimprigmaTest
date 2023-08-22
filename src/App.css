@@ -42,8 +42,12 @@
   display: flex;
   padding: 1em;
   justify-content: left;
-  height: 4em;
+  height: 2em;
   width: 100%;
   background-color: #ffffff !important;
+  /* box-shadow: 1px 1px 1px 0.5 black; */
 
+}
+nav{
+  border: 1px solid blueviolet;
 }
